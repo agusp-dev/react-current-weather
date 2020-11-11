@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
-const Form = ({ searchData, saveSearchData, startSearch }) => {
+const Form = ({ searchData, saveSearchData, startSearch, showError }) => {
 
-	const [error, showError] = useState(false)
 	const { city, country } = searchData
 
 	const handleSearch = e => {
@@ -18,18 +17,15 @@ const Form = ({ searchData, saveSearchData, startSearch }) => {
 
 		//check data
 		if (city.trim().length === 0 || 
-			country.trim().length === 0) return showError(true)
+			country.trim().length === 0) return showError('All fields are required!')
 		
 		//data ok
-		showError(false)
+		showError('')
 		startSearch()
 	}
 
 	return (
 		<form onSubmit={ e => handleSubmit(e) }>
-			{error && (
-				<p className='red darken-4 error'>Please, complete all fields!</p>
-			)}
 			<div className='input-field col s12'>
 				<input 
 					type='text'
@@ -70,7 +66,8 @@ const Form = ({ searchData, saveSearchData, startSearch }) => {
 Form.propTypes = {
 	searchData: PropTypes.object.isRequired,
 	saveSearchData: PropTypes.func.isRequired,
-	startSearch: PropTypes.func.isRequired
+	startSearch: PropTypes.func.isRequired,
+	showError: PropTypes.func.isRequired
 }
 
 export { Form }
