@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Header, Form, WeatherCard, Error } from './components'
 import { weather } from './services'
 
@@ -43,9 +43,6 @@ function App() {
 								showError={ showError }/>
 						</div>
 						<div className='col m6 s12'>
-							{/* {weatherError && (
-								
-							)} */}
 							{weatherData && Object.keys(weatherData).length > 0 && (
 								<WeatherCard weather={ weatherData }/>
 							)}
